@@ -1,0 +1,13 @@
+*.dll
+*.Infrastructure.assets.cache
+/IziWork.Infrastructure/obj/Release/net8.0/IziWork.Infrastructure.AssemblyInfoInputs.cache
+*.Infrastructure.csproj.AssemblyReference.cache
+*.Infrastructure.csproj.CoreCompileInputs.cache
+*.Infrastructure.csproj.FileListAbsolute.txt
+*.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+*.Infrastructure.genruntimeconfig.cache
+*.Repository.csproj.FileListAbsolute.txt
+*.AssemblyInfo.cs
+*.cache
+*.vsidx
+

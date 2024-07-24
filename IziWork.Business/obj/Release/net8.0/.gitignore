@@ -1,0 +1,9 @@
+*.Business.AssemblyInfo.cs
+*.Business.AssemblyInfoInputs.cache
+*.Business.assets.cache
+*.Business.csproj.AssemblyReference.cache
+*.Business.csproj.CoreCompileInputs.cache
+*.Business.csproj.FileListAbsolute.txt
+*.Business.GeneratedMSBuildEditorConfig.editorconfig
+*.Business.pdb
+*.Business.sourcelink.json

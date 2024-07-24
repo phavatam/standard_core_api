@@ -1,0 +1,3 @@
+*.Infrastructure.AssemblyInfo.cs
+*.Infrastructure.sourcelink.json
+*.Infrastructure.pdb

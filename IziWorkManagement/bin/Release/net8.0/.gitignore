@@ -1,0 +1,8 @@
+*.Infrastructure.pdb
+*.Repository.pdb
+*.deps.json
+*.exe
+*.pdb
+*.Business.pdb
+*.Data.pdb
+*.json

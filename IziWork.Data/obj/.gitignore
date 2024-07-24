@@ -1,0 +1,3 @@
+*.nuget.cache
+*.assets.json
+*.Data.csproj.nuget.dgspec.json

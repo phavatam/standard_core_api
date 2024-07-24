@@ -1,0 +1,601 @@
+Script alter table, add column, set null column ,...
+----------------- [Start] TamPV - 21.5.2024 -------------------
+Example: 
+- Alter table Users add gender bit not null;
+----------------- [End] TamPV - 21.5.2024 ---------------------
+----------------- [Start] TamPV - 1.6.2024 -------------------
+USE [IziWorkManagement]
+GO
+/****** Object:  Table [dbo].[Departments]    Script Date: 6/1/2024 4:29:16 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Departments](
+	[Id] [uniqueidentifier] NOT NULL,
+	[Code] [nvarchar](50) NOT NULL,
+	[Name] [nvarchar](500) NOT NULL,
+	[Type] [int] NOT NULL,
+	[JobGradeId] [uniqueidentifier] NOT NULL,
+	[ParentId] [uniqueidentifier] NULL,
+	[IsDeleted] [bit] NULL,
+	[Created] [datetimeoffset](7) NULL,
+	[Modified] [datetimeoffset](7) NULL,
+	[CreatedById] [uniqueidentifier] NULL,
+	[ModifiedById] [uniqueidentifier] NULL,
+	[CreatedBy] [nvarchar](255) NULL,
+	[ModifiedBy] [nvarchar](255) NULL,
+	[CreatedByFullName] [nvarchar](255) NULL,
+	[ModifiedByFullName] [nvarchar](255) NULL,
+	[Note] [nvarchar](max) NULL,
+	[HasTrackingLog] [bit] NULL,
+ CONSTRAINT [PK_dbo.Departments] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[JobGrades]    Script Date: 6/1/2024 4:29:16 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[JobGrades](
+	[Id] [uniqueidentifier] NOT NULL,
+	[Grade] [int] NOT NULL,
+	[Caption] [nvarchar](max) NULL,
+	[Title] [nvarchar](max) NULL,
+	[IsDeleted] [bit] NULL,
+	[Created] [datetimeoffset](7) NULL,
+	[Modified] [datetimeoffset](7) NULL,
+	[CreatedById] [uniqueidentifier] NULL,
+	[ModifiedById] [uniqueidentifier] NULL,
+	[CreatedBy] [nvarchar](255) NULL,
+	[ModifiedBy] [nvarchar](255) NULL,
+	[CreatedByFullName] [nvarchar](255) NULL,
+	[ModifiedByFullName] [nvarchar](255) NULL,
+ CONSTRAINT [PK_dbo.JobGrades] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[MetadataItems]    Script Date: 6/1/2024 4:29:16 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MetadataItems](
+	[Id] [uniqueidentifier] NOT NULL,
+	[Name] [nvarchar](100) NULL,
+	[Value] [nvarchar](100) NULL,
+	[TypeId] [uniqueidentifier] NULL,
+	[ParentItemId] [uniqueidentifier] NULL,
+	[Created] [datetimeoffset](7) NULL,
+	[Modified] [datetimeoffset](7) NULL,
+	[CreatedById] [uniqueidentifier] NULL,
+	[ModifiedById] [uniqueidentifier] NULL,
+	[IsDisabled] [bit] NOT NULL,
+	[CreatedBy] [nvarchar](255) NULL,
+	[ModifiedBy] [nvarchar](255) NULL,
+	[CreatedByFullName] [nvarchar](255) NULL,
+	[ModifiedByFullName] [nvarchar](255) NULL,
+	[IsDeleted] [bit] NULL,
+ CONSTRAINT [PK_dbo.MetadataItems] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[MetadataTypes]    Script Date: 6/1/2024 4:29:16 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MetadataTypes](
+	[Id] [uniqueidentifier] NOT NULL,
+	[Name] [nvarchar](100) NULL,
+	[Value] [nvarchar](100) NULL,
+	[Created] [datetimeoffset](7) NULL,
+	[CreatedById] [uniqueidentifier] NULL,
+	[ModifiedById] [uniqueidentifier] NULL,
+	[Modified] [datetimeoffset](7) NULL,
+	[CreatedBy] [nvarchar](255) NULL,
+	[ModifiedBy] [nvarchar](255) NULL,
+	[CreatedByFullName] [nvarchar](255) NULL,
+	[ModifiedByFullName] [nvarchar](255) NULL,
+	[IsDeleted] [bit] NULL,
+ CONSTRAINT [PK_dbo.MetadataTypes] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Navigation]    Script Date: 6/1/2024 4:29:16 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Navigation](
+	[Id] [uniqueidentifier] NOT NULL,
+	[Name] [nvarchar](100) NULL,
+	[Url] [nvarchar](200) NULL,
+	[NavigationParentID] [uniqueidentifier] NULL,
+	[Type] [int] NULL,
+	[IsBlank] [bit] NULL,
+	[IsDeleted] [bit] NULL,
+	[IsActived] [bit] NULL,
+	[Created] [datetimeoffset](7) NULL,
+	[CreatedById] [uniqueidentifier] NULL,
+	[Modified] [datetimeoffset](7) NULL,
+	[ModifiedId] [uniqueidentifier] NULL,
+	[ModifiedById] [uniqueidentifier] NULL,
+	[CreatedBy] [nvarchar](255) NULL,
+	[ModifiedBy] [nvarchar](255) NULL,
+	[CreatedByFullName] [nvarchar](255) NULL,
+	[ModifiedByFullName] [nvarchar](255) NULL,
+ CONSTRAINT [PK_dbo.Navigation] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Roles]    Script Date: 6/1/2024 4:29:16 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Roles](
+	[Id] [uniqueidentifier] NOT NULL,
+	[Name] [nvarchar](255) NOT NULL,
+	[IsActivated] [bit] NULL,
+	[IsDeleted] [bit] NULL,
+	[Created] [datetimeoffset](7) NULL,
+	[Modified] [datetimeoffset](7) NULL,
+	[CreatedById] [uniqueidentifier] NULL,
+	[ModifiedById] [uniqueidentifier] NULL,
+	[CreatedBy] [nvarchar](255) NULL,
+	[ModifiedBy] [nvarchar](255) NULL,
+	[CreatedByFullName] [nvarchar](255) NULL,
+	[ModifiedByFullName] [nvarchar](255) NULL,
+ CONSTRAINT [PK_Role] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[UserDepartmentMapping]    Script Date: 6/1/2024 4:29:16 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[UserDepartmentMapping](
+	[Id] [uniqueidentifier] NOT NULL,
+	[DepartmentId] [uniqueidentifier] NOT NULL,
+	[UserId] [uniqueidentifier] NOT NULL,
+	[IsDeleted] [bit] NULL,
+	[Created] [datetimeoffset](7) NULL,
+	[Modified] [datetimeoffset](7) NULL,
+	[CreatedById] [uniqueidentifier] NULL,
+	[ModifiedById] [uniqueidentifier] NULL,
+	[CreatedBy] [nvarchar](255) NULL,
+	[ModifiedBy] [nvarchar](255) NULL,
+	[CreatedByFullName] [nvarchar](255) NULL,
+	[ModifiedByFullName] [nvarchar](255) NULL,
+ CONSTRAINT [PK_UserDepartmentMapping] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[UserDepartmentRoleMapping]    Script Date: 6/1/2024 4:29:16 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[UserDepartmentRoleMapping](
+	[Id] [uniqueidentifier] NOT NULL,
+	[UserDepartmentMappingId] [uniqueidentifier] NULL,
+	[RoleId] [uniqueidentifier] NULL,
+	[IsDeleted] [bit] NULL,
+	[Created] [datetimeoffset](7) NULL,
+	[Modified] [datetimeoffset](7) NULL,
+	[CreatedById] [uniqueidentifier] NULL,
+	[ModifiedById] [uniqueidentifier] NULL,
+	[CreatedBy] [nvarchar](255) NULL,
+	[ModifiedBy] [nvarchar](255) NULL,
+	[CreatedByFullName] [nvarchar](255) NULL,
+	[ModifiedByFullName] [nvarchar](255) NULL,
+ CONSTRAINT [PK_UserDepartmentRoleMapping] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Users]    Script Date: 6/1/2024 4:29:16 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Users](
+	[Id] [uniqueidentifier] NOT NULL,
+	[FullName] [nvarchar](max) NULL,
+	[LoginName] [nvarchar](max) NOT NULL,
+	[Password] [nvarchar](max) NULL,
+	[Gender] [int] NULL,
+	[Phone] [nvarchar](20) NULL,
+	[Email] [nvarchar](max) NULL,
+	[IsActivated] [bit] NULL,
+	[Type] [int] NULL,
+	[Role] [int] NULL,
+	[IsBlocked] [bit] NULL,
+	[IsDeleted] [bit] NULL,
+	[Created] [datetimeoffset](7) NULL,
+	[Modified] [datetimeoffset](7) NULL,
+	[CreatedById] [uniqueidentifier] NULL,
+	[ModifiedById] [uniqueidentifier] NULL,
+	[CreatedBy] [nvarchar](255) NULL,
+	[ModifiedBy] [nvarchar](255) NULL,
+	[CreatedByFullName] [nvarchar](255) NULL,
+	[ModifiedByFullName] [nvarchar](255) NULL,
+ CONSTRAINT [PK_dbo.Users] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[WorkflowConditions]    Script Date: 6/1/2024 4:29:16 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[WorkflowConditions](
+	[Id] [uniqueidentifier] NOT NULL,
+	[WorkflowTemplateId] [uniqueidentifier] NOT NULL,
+	[FieldName] [varchar](255) NULL,
+	[FieldValues] [varchar](255) NULL,
+ CONSTRAINT [PK_StartWorkflowConditions_1] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[WorkflowHistories]    Script Date: 6/1/2024 4:29:16 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[WorkflowHistories](
+	[Id] [uniqueidentifier] NOT NULL,
+	[InstanceId] [uniqueidentifier] NOT NULL,
+	[ApproverId] [uniqueidentifier] NULL,
+	[AssignedToUserId] [uniqueidentifier] NULL,
+	[AssignedToDepartmentId] [uniqueidentifier] NULL,
+	[AssignedToDepartmentType] [int] NOT NULL,
+	[Approver] [nvarchar](max) NULL,
+	[ApproverFullName] [nvarchar](max) NULL,
+	[Outcome] [nvarchar](max) NULL,
+	[Comment] [nvarchar](max) NULL,
+	[VoteType] [int] NOT NULL,
+	[StepNumber] [int] NOT NULL,
+	[IsStepCompleted] [bit] NOT NULL,
+	[DueDate] [datetimeoffset](7) NOT NULL,
+	[Created] [datetimeoffset](7) NULL,
+	[Modified] [datetimeoffset](7) NULL,
+	[CreatedById] [uniqueidentifier] NULL,
+	[ModifiedById] [uniqueidentifier] NULL,
+	[CreatedBy] [nvarchar](255) NULL,
+	[ModifiedBy] [nvarchar](255) NULL,
+	[CreatedByFullName] [nvarchar](255) NULL,
+	[ModifiedByFullName] [nvarchar](255) NULL,
+	[IsDeleted] [bit] NULL,
+ CONSTRAINT [PK_dbo.WorkflowHistories] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[WorkflowInstances]    Script Date: 6/1/2024 4:29:16 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[WorkflowInstances](
+	[Id] [uniqueidentifier] NOT NULL,
+	[WorkflowName] [nvarchar](max) NULL,
+	[TemplateId] [uniqueidentifier] NOT NULL,
+	[WorkflowDataStr] [nvarchar](max) NULL,
+	[ItemId] [uniqueidentifier] NOT NULL,
+	[ItemReferenceNumber] [nvarchar](255) NULL,
+	[IsCompleted] [bit] NOT NULL,
+	[IsTerminated] [bit] NOT NULL,
+	[Created] [datetimeoffset](7) NULL,
+	[Modified] [datetimeoffset](7) NULL,
+	[DefaultCompletedStatus] [nvarchar](max) NULL,
+	[CreatedById] [uniqueidentifier] NULL,
+	[ModifiedById] [uniqueidentifier] NULL,
+	[CreatedBy] [nvarchar](255) NULL,
+	[ModifiedBy] [nvarchar](255) NULL,
+	[CreatedByFullName] [nvarchar](255) NULL,
+	[ModifiedByFullName] [nvarchar](255) NULL,
+	[IsDeleted] [bit] NULL,
+ CONSTRAINT [PK_dbo.WorkflowInstances] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[WorkflowRoles]    Script Date: 6/1/2024 4:29:16 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[WorkflowRoles](
+	[Id] [uniqueidentifier] NOT NULL,
+	[WorkflowStepId] [uniqueidentifier] NOT NULL,
+	[RoleId] [uniqueidentifier] NOT NULL,
+ CONSTRAINT [PK_WorkflowRoles] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[WorkflowSteps]    Script Date: 6/1/2024 4:29:16 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[WorkflowSteps](
+	[Id] [uniqueidentifier] NOT NULL,
+	[WorkflowTemplateId] [uniqueidentifier] NOT NULL,
+	[StepName] [nvarchar](255) NULL,
+	[StepNumber] [int] NULL,
+	[SuccessVote] [nvarchar](255) NULL,
+	[FailureVote] [nvarchar](255) NULL,
+	[DueDateNumber] [int] NULL,
+	[IsStatusFollowStepName] [bit] NULL,
+	[SkipStepConditions] [nchar](10) NULL,
+	[ParticipantType] [int] NULL,
+	[IgnoreIfNoParticipant] [bit] NULL,
+	[PreventAutoPopulate] [bit] NULL,
+	[AllowRequestToChange] [bit] NULL,
+	[IsStepWithConditions] [bit] NULL,
+	[DefaultStatus] [nvarchar](255) NULL,
+	[JobGradeId] [uniqueidentifier] NULL,
+	[MaxJobGradeId] [uniqueidentifier] NULL,
+ CONSTRAINT [PK_Steps] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[WorkflowTasks]    Script Date: 6/1/2024 4:29:16 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[WorkflowTasks](
+	[Id] [uniqueidentifier] NOT NULL,
+	[Title] [nvarchar](max) NULL,
+	[ItemId] [uniqueidentifier] NOT NULL,
+	[ItemType] [nvarchar](max) NULL,
+	[ReferenceNumber] [nvarchar](max) NULL,
+	[DueDate] [datetimeoffset](7) NOT NULL,
+	[AssignedToDepartmentId] [uniqueidentifier] NULL,
+	[AssignedToDepartmentGroup] [int] NOT NULL,
+	[AssignedToId] [uniqueidentifier] NULL,
+	[RequestedDepartmentId] [uniqueidentifier] NULL,
+	[RequestedDepartmentCode] [nvarchar](max) NULL,
+	[RequestedDepartmentName] [nvarchar](max) NULL,
+	[Status] [nvarchar](max) NULL,
+	[RequestorId] [uniqueidentifier] NULL,
+	[RequestorUserName] [nvarchar](max) NULL,
+	[RequestorFullName] [nvarchar](max) NULL,
+	[Vote] [int] NOT NULL,
+	[IsCompleted] [bit] NOT NULL,
+	[WorkflowInstanceId] [uniqueidentifier] NOT NULL,
+	[Created] [datetimeoffset](7) NULL,
+	[Modified] [datetimeoffset](7) NULL,
+	[CreatedById] [uniqueidentifier] NULL,
+	[ModifiedById] [uniqueidentifier] NULL,
+	[CreatedBy] [nvarchar](255) NULL,
+	[ModifiedBy] [nvarchar](255) NULL,
+	[CreatedByFullName] [nvarchar](255) NULL,
+	[ModifiedByFullName] [nvarchar](255) NULL,
+	[IsDeleted] [bit] NULL,
+ CONSTRAINT [PK_dbo.WorkflowTasks] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[WorkflowTemplates]    Script Date: 6/1/2024 4:29:16 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[WorkflowTemplates](
+	[Id] [uniqueidentifier] NOT NULL,
+	[WorkflowName] [nvarchar](255) NULL,
+	[ItemType] [nvarchar](255) NULL,
+	[IsActivated] [bit] NOT NULL,
+	[Created] [datetimeoffset](7) NULL,
+	[Modified] [datetimeoffset](7) NULL,
+	[Order] [int] NOT NULL,
+	[StartWorkflowButton] [nvarchar](max) NULL,
+	[DefaultCompletedStatus] [nvarchar](max) NULL,
+	[CreatedById] [uniqueidentifier] NULL,
+	[ModifiedById] [uniqueidentifier] NULL,
+	[CreatedBy] [nvarchar](255) NULL,
+	[ModifiedBy] [nvarchar](255) NULL,
+	[CreatedByFullName] [nvarchar](255) NULL,
+	[ModifiedByFullName] [nvarchar](255) NULL,
+	[IsDeleted] [bit] NULL,
+ CONSTRAINT [PK_dbo.WorkflowTemplates] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[MetadataItems] ADD  CONSTRAINT [DF__MetadataI__IsDis__5165187F]  DEFAULT ((0)) FOR [IsDisabled]
+GO
+ALTER TABLE [dbo].[Navigation] ADD  CONSTRAINT [DF__Navigatio__IsBla__5DCAEF64]  DEFAULT ((0)) FOR [IsBlank]
+GO
+ALTER TABLE [dbo].[Navigation] ADD  CONSTRAINT [DF__Navigatio__IsDel__5EBF139D]  DEFAULT ((0)) FOR [IsDeleted]
+GO
+ALTER TABLE [dbo].[Navigation] ADD  CONSTRAINT [DF__Navigatio__IsAct__5FB337D6]  DEFAULT ((0)) FOR [IsActived]
+GO
+ALTER TABLE [dbo].[Navigation] ADD  CONSTRAINT [DF_Navigation_ModifiedById]  DEFAULT ('00000000-0000-0000-0000-000000000000') FOR [ModifiedById]
+GO
+ALTER TABLE [dbo].[WorkflowHistories] ADD  CONSTRAINT [DF_WorkflowHistories_ModifiedById]  DEFAULT ('00000000-0000-0000-0000-000000000000') FOR [ModifiedById]
+GO
+ALTER TABLE [dbo].[WorkflowInstances] ADD  CONSTRAINT [DF_WorkflowInstances_ModifiedById]  DEFAULT ('00000000-0000-0000-0000-000000000000') FOR [ModifiedById]
+GO
+ALTER TABLE [dbo].[WorkflowTemplates] ADD  CONSTRAINT [DF__WorkflowT__Modif__31EC6D26]  DEFAULT ('00000000-0000-0000-0000-000000000000') FOR [ModifiedById]
+GO
+ALTER TABLE [dbo].[Departments]  WITH CHECK ADD  CONSTRAINT [FK_dbo.Departments_dbo.Departments_ParentId] FOREIGN KEY([ParentId])
+REFERENCES [dbo].[Departments] ([Id])
+GO
+ALTER TABLE [dbo].[Departments] CHECK CONSTRAINT [FK_dbo.Departments_dbo.Departments_ParentId]
+GO
+ALTER TABLE [dbo].[Departments]  WITH CHECK ADD  CONSTRAINT [FK_dbo.Departments_dbo.JobGrades_JobGradeId] FOREIGN KEY([JobGradeId])
+REFERENCES [dbo].[JobGrades] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Departments] CHECK CONSTRAINT [FK_dbo.Departments_dbo.JobGrades_JobGradeId]
+GO
+ALTER TABLE [dbo].[MetadataItems]  WITH CHECK ADD  CONSTRAINT [FK_dbo.MetadataItems_dbo.MetadataItems_ParentItemId] FOREIGN KEY([ParentItemId])
+REFERENCES [dbo].[MetadataItems] ([Id])
+GO
+ALTER TABLE [dbo].[MetadataItems] CHECK CONSTRAINT [FK_dbo.MetadataItems_dbo.MetadataItems_ParentItemId]
+GO
+ALTER TABLE [dbo].[MetadataItems]  WITH CHECK ADD  CONSTRAINT [FK_dbo.MetadataItems_dbo.MetadataTypes_TypeId] FOREIGN KEY([TypeId])
+REFERENCES [dbo].[MetadataTypes] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[MetadataItems] CHECK CONSTRAINT [FK_dbo.MetadataItems_dbo.MetadataTypes_TypeId]
+GO
+ALTER TABLE [dbo].[Navigation]  WITH CHECK ADD  CONSTRAINT [FK_Navigation_Navigation] FOREIGN KEY([NavigationParentID])
+REFERENCES [dbo].[Navigation] ([Id])
+GO
+ALTER TABLE [dbo].[Navigation] CHECK CONSTRAINT [FK_Navigation_Navigation]
+GO
+ALTER TABLE [dbo].[Navigation]  WITH CHECK ADD  CONSTRAINT [FK_Navigation_Users] FOREIGN KEY([CreatedById])
+REFERENCES [dbo].[Users] ([Id])
+GO
+ALTER TABLE [dbo].[Navigation] CHECK CONSTRAINT [FK_Navigation_Users]
+GO
+ALTER TABLE [dbo].[UserDepartmentMapping]  WITH CHECK ADD  CONSTRAINT [FK_UserDepartmentMapping_Departments] FOREIGN KEY([DepartmentId])
+REFERENCES [dbo].[Departments] ([Id])
+GO
+ALTER TABLE [dbo].[UserDepartmentMapping] CHECK CONSTRAINT [FK_UserDepartmentMapping_Departments]
+GO
+ALTER TABLE [dbo].[UserDepartmentMapping]  WITH CHECK ADD  CONSTRAINT [FK_UserDepartmentMapping_Users] FOREIGN KEY([UserId])
+REFERENCES [dbo].[Users] ([Id])
+GO
+ALTER TABLE [dbo].[UserDepartmentMapping] CHECK CONSTRAINT [FK_UserDepartmentMapping_Users]
+GO
+ALTER TABLE [dbo].[UserDepartmentRoleMapping]  WITH CHECK ADD  CONSTRAINT [FK_UserDepartmentRoleMapping_Roles] FOREIGN KEY([RoleId])
+REFERENCES [dbo].[Roles] ([Id])
+GO
+ALTER TABLE [dbo].[UserDepartmentRoleMapping] CHECK CONSTRAINT [FK_UserDepartmentRoleMapping_Roles]
+GO
+ALTER TABLE [dbo].[UserDepartmentRoleMapping]  WITH CHECK ADD  CONSTRAINT [FK_UserDepartmentRoleMapping_UserDepartmentMapping] FOREIGN KEY([UserDepartmentMappingId])
+REFERENCES [dbo].[UserDepartmentMapping] ([Id])
+GO
+ALTER TABLE [dbo].[UserDepartmentRoleMapping] CHECK CONSTRAINT [FK_UserDepartmentRoleMapping_UserDepartmentMapping]
+GO
+ALTER TABLE [dbo].[WorkflowConditions]  WITH CHECK ADD  CONSTRAINT [FK_WorkflowConditions_WorkflowTemplates] FOREIGN KEY([WorkflowTemplateId])
+REFERENCES [dbo].[WorkflowTemplates] ([Id])
+GO
+ALTER TABLE [dbo].[WorkflowConditions] CHECK CONSTRAINT [FK_WorkflowConditions_WorkflowTemplates]
+GO
+ALTER TABLE [dbo].[WorkflowHistories]  WITH CHECK ADD  CONSTRAINT [FK_dbo.WorkflowHistories_dbo.Departments_AssignedToDepartmentId] FOREIGN KEY([AssignedToDepartmentId])
+REFERENCES [dbo].[Departments] ([Id])
+GO
+ALTER TABLE [dbo].[WorkflowHistories] CHECK CONSTRAINT [FK_dbo.WorkflowHistories_dbo.Departments_AssignedToDepartmentId]
+GO
+ALTER TABLE [dbo].[WorkflowHistories]  WITH CHECK ADD  CONSTRAINT [FK_dbo.WorkflowHistories_dbo.Users_AssignedToUserId] FOREIGN KEY([AssignedToUserId])
+REFERENCES [dbo].[Users] ([Id])
+GO
+ALTER TABLE [dbo].[WorkflowHistories] CHECK CONSTRAINT [FK_dbo.WorkflowHistories_dbo.Users_AssignedToUserId]
+GO
+ALTER TABLE [dbo].[WorkflowHistories]  WITH CHECK ADD  CONSTRAINT [FK_dbo.WorkflowHistories_dbo.WorkflowInstances_InstanceId] FOREIGN KEY([InstanceId])
+REFERENCES [dbo].[WorkflowInstances] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[WorkflowHistories] CHECK CONSTRAINT [FK_dbo.WorkflowHistories_dbo.WorkflowInstances_InstanceId]
+GO
+ALTER TABLE [dbo].[WorkflowInstances]  WITH CHECK ADD  CONSTRAINT [FK_WorkflowInstances_WorkflowTemplates] FOREIGN KEY([TemplateId])
+REFERENCES [dbo].[WorkflowTemplates] ([Id])
+GO
+ALTER TABLE [dbo].[WorkflowInstances] CHECK CONSTRAINT [FK_WorkflowInstances_WorkflowTemplates]
+GO
+ALTER TABLE [dbo].[WorkflowRoles]  WITH CHECK ADD  CONSTRAINT [FK_WorkflowRoles_Roles] FOREIGN KEY([RoleId])
+REFERENCES [dbo].[Roles] ([Id])
+GO
+ALTER TABLE [dbo].[WorkflowRoles] CHECK CONSTRAINT [FK_WorkflowRoles_Roles]
+GO
+ALTER TABLE [dbo].[WorkflowRoles]  WITH CHECK ADD  CONSTRAINT [FK_WorkflowRoles_WorkflowSteps] FOREIGN KEY([WorkflowStepId])
+REFERENCES [dbo].[WorkflowSteps] ([Id])
+GO
+ALTER TABLE [dbo].[WorkflowRoles] CHECK CONSTRAINT [FK_WorkflowRoles_WorkflowSteps]
+GO
+ALTER TABLE [dbo].[WorkflowSteps]  WITH CHECK ADD  CONSTRAINT [FK_WorkflowSteps_WorkflowTemplates] FOREIGN KEY([WorkflowTemplateId])
+REFERENCES [dbo].[WorkflowTemplates] ([Id])
+GO
+ALTER TABLE [dbo].[WorkflowSteps] CHECK CONSTRAINT [FK_WorkflowSteps_WorkflowTemplates]
+GO
+ALTER TABLE [dbo].[WorkflowTasks]  WITH CHECK ADD  CONSTRAINT [FK_dbo.WorkflowTasks_dbo.WorkflowInstances_WorkflowInstanceId] FOREIGN KEY([WorkflowInstanceId])
+REFERENCES [dbo].[WorkflowInstances] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[WorkflowTasks] CHECK CONSTRAINT [FK_dbo.WorkflowTasks_dbo.WorkflowInstances_WorkflowInstanceId]
+GO
+ALTER TABLE [dbo].[WorkflowTasks]  WITH CHECK ADD  CONSTRAINT [FK_WorkflowTasks_Departments1] FOREIGN KEY([AssignedToDepartmentId])
+REFERENCES [dbo].[Departments] ([Id])
+GO
+ALTER TABLE [dbo].[WorkflowTasks] CHECK CONSTRAINT [FK_WorkflowTasks_Departments1]
+GO
+----------------- [End] TamPV - 1.6.2024 ------------------- ------------------- ------------------- ------------------- ------------------- ------------------- ------------------- ------------------- ------------------- ------------------- ------------------- ------------------- ------------------- ------------------- ------------------- -------------------
+----------------- [Start] TamPV - 4.6.2024 ------------------- ------------------- ------------------- ------------------- ------------------- ------------------- ------------------- ------------------- ------------------- ------------------- ------------------- ------------------- ------------------- ------------------- ------------------- -------------------
+alter table UserDepartmentMapping add IsHeadCount bit not null;
+GO
+/****** Object:  Table [dbo].[WorkflowSteps]    Script Date: 6/4/2024 3:23:03 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[WorkflowSteps](
+	[Id] [uniqueidentifier] NOT NULL,
+	[WorkflowTemplateId] [uniqueidentifier] NOT NULL,
+	[StepName] [nvarchar](255) NULL,
+	[StepNumber] [int] NULL,
+	[SuccessVote] [nvarchar](255) NULL,
+	[FailureVote] [nvarchar](255) NULL,
+	[DueDateNumber] [int] NULL,
+	[IsStatusFollowStepName] [bit] NULL,
+	[DataField] [varchar](100) NULL,
+	[SkipStepConditions] [bit] NULL,
+	[ParticipantType] [int] NULL,
+	[IgnoreIfNoParticipant] [bit] NULL,
+	[PreventAutoPopulate] [bit] NULL,
+	[AllowRequestToChange] [bit] NULL,
+	[IsStepWithConditions] [bit] NULL,
+	[DefaultStatus] [nvarchar](255) NULL,
+	[JobGradeId] [uniqueidentifier] NULL,
+	[MaxJobGradeId] [uniqueidentifier] NULL,
+	[Created] [datetimeoffset](7) NULL,
+	[Modified] [datetimeoffset](7) NULL,
+ CONSTRAINT [PK_Steps] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[WorkflowSteps]  WITH CHECK ADD  CONSTRAINT [FK_WorkflowSteps_WorkflowTemplates] FOREIGN KEY([WorkflowTemplateId])
+REFERENCES [dbo].[WorkflowTemplates] ([Id])
+GO
+ALTER TABLE [dbo].[WorkflowSteps] CHECK CONSTRAINT [FK_WorkflowSteps_WorkflowTemplates]
+GO
+----------------- [End] TamPV - 1.6.2024 -------------------

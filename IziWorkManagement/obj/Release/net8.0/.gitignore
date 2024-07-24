@@ -1,0 +1,13 @@
+*.deb14a77fb.txt
+*.sourcelink.json
+*.pdb
+*.GeneratedMSBuildEditorConfig.editorconfig
+*.genpublishdeps.cache
+*.genruntimeconfig.cache
+*.AssemblyInfoInputs.cache
+*.assets.cache
+*.csproj.AssemblyReference.cache
+*.csproj.CoreCompileInputs.cache
+*.csproj.FileListAbsolute.txt
+*.deps.json
+*.exe

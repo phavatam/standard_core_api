@@ -1,0 +1,7 @@
+*.Data.dll
+/IziWork.Infrastructure.dll
+/IziWork.Infrastructure.pdb
+/IziWork.Data.pdb
+/IziWork.Business.pdb
+/IziWork.Business.dll
+/IziWork.Repository.pdb

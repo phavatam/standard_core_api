@@ -1,0 +1,6 @@
+*.Business.pdb
+*.Data.pdb
+*.Infrastructure.deps.json
+*.Infrastructure.pdb
+*.Repository.pdb
+*.Infrastructure.runtimeconfig.json

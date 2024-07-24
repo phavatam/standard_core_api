@@ -1,0 +1,10 @@
+*.cache
+*.csproj.FileListAbsolute.txt
+*.assets.cache
+*.AssemblyInfo.cs
+*.dll
+*.GeneratedMSBuildEditorConfig.editorconfig
+*.pdb
+*.exe
+*.sourcelink.json
+/IziWorkManagement.csproj.AssemblyReference.cache

@@ -1,0 +1,10 @@
+*.pdb
+/IziWork.Data.sourcelink.json
+/IziWork.Data.AssemblyInfo.cs
+/IziWork.Data.AssemblyInfoInputs.cache
+/IziWork.Data.dll
+/IziWork.Data.csproj.CoreCompileInputs.cache
+*.Data.assets.cache
+*.Data.GeneratedMSBuildEditorConfig.editorconfig
+*.Data.genruntimeconfig.cache
+*.Data.csproj.FileListAbsolute.txt

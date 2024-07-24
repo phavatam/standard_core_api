@@ -1,0 +1,6 @@
+@IziWorkManagement_HostAddress = http://localhost:5237
+
+GET {{IziWorkManagement_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
