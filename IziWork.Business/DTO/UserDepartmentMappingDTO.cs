@@ -16,6 +16,7 @@ namespace IziWork.Business.DTO
         public string FullName { get; set; }
         public string UserLoginName { get; set; }
         public bool? IsDeleted { get; set; }
+        public bool IsHeadCount { get; set; }
         public DateTimeOffset? Created { get; set; }
         public DateTimeOffset? Modified { get; set; }
         public Guid? CreatedById { get; set; }

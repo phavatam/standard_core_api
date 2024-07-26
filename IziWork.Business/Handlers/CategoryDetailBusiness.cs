@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
+using Core.Repositories.Business.IRepositories;
 using IziWork.Business.Args;
-using IziWork.Business.Constans;
+
 using IziWork.Business.DTO;
 using IziWork.Business.Interfaces;
-using IziWork.Business.IRepositories;
+using IziWork.Common.Args;
+using IziWork.Common.Constans;
+using IziWork.Common.DTO;
 using IziWork.Data.Entities;
 using Mapster;
 using Microsoft.Extensions.Configuration;
@@ -72,7 +75,7 @@ namespace IziWork.Business.Handlers
                 }
                 var categoryDetailUpdated = _uow.GetRepository<CategoryDetail>().Update(currentCategoryDetail);
                 var mapperData = _mapper.Map<CategoryDetailDTO>(categoryDetailUpdated);
-                mapperData.Type = (Enums.DefineEnums.CATEGORY_TYPE) findCategory.Type;
+                mapperData.Type = (Common.Enums.DefineEnums.CATEGORY_TYPE) findCategory.Type;
                 await _uow.CommitAsync();
                 resultDTO = new ResultDTO()
                 {

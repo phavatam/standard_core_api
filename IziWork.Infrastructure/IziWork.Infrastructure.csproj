@@ -7,8 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Constants\**" />
     <Compile Remove="Helper\**" />
+    <EmbeddedResource Remove="Constants\**" />
     <EmbeddedResource Remove="Helper\**" />
+    <None Remove="Constants\**" />
     <None Remove="Helper\**" />
   </ItemGroup>
 
@@ -34,7 +37,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Constants\" />
     <Folder Include="Interface\" />
   </ItemGroup>
 

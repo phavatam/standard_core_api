@@ -2,7 +2,7 @@
 using IziWork.Business.Args;
 using IziWork.Business.DTO;
 using IziWork.Business.Interfaces;
-using IziWork.Business.IRepositories;
+
 using IziWork.Data.Entities;
 using Mapster;
 using MapsterMapper;
@@ -19,6 +19,9 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Core.Repositories.Business.IRepositories;
+using IziWork.Common.DTO;
+using IziWork.Common.Args;
 
 namespace IziWork.Business.Handlers
 {

@@ -14,7 +14,7 @@ namespace IziWork.Business.Args
         public string ReferenceNumber { get; set; }
         public List<Guid>? ReceivingDepartments { get; set; }
         public int? Type { get; set; }
-        public string Name { get; set; } = null!;
+        public string? Name { get; set; } = null!;
         public DateTimeOffset? IssueDate { get; set; }
         public DateTimeOffset? ExpectedDate { get; set; }
         public Guid? RegistryId { get; set; }

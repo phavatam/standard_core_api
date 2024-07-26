@@ -1,6 +1,7 @@
-﻿using IziWork.Business.Constans;
+﻿using Core.Repositories.Business.IRepositories;
+
 using IziWork.Business.Interfaces;
-using IziWork.Business.IRepositories;
+using IziWork.Common.Constans;
 using IziWork.Data.Entities;
 using IziWorkManagement.Utility;
 using Microsoft.AspNetCore.Http;
@@ -8,6 +9,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using IziWork.Common.Args;
+using IziWork.Common.DTO;
 using System.Net;
 using System.Text;
 using System.Text.Json;
@@ -129,7 +132,7 @@ namespace IziWorkManagement.Middleware
             var response = context.Response;
             response.StatusCode = (int)HttpStatusCode.BadRequest;
 
-            var errorResponse = new IziWork.Business.DTO.ResultDTO
+            var errorResponse = new ResultDTO
             {
                 ErrorCodes = new List<int> { 505 },
                 Messages = new List<string> { "Đã xảy ra lỗi khi xác thực: "  + exception.Message}
@@ -146,7 +149,7 @@ namespace IziWorkManagement.Middleware
             var response = context.Response;
             response.StatusCode = (int) HttpStatusCode.Unauthorized;
 
-            var errorResponse = new IziWork.Business.DTO.ResultDTO
+            var errorResponse = new ResultDTO
             {
                 ErrorCodes = new List<int> { 401 },
                 Messages = new List<string> { "NOT_PERMISSION_ACCESS_TO_SYSTEM" }
@@ -163,7 +166,7 @@ namespace IziWorkManagement.Middleware
             var response = context.Response;
             response.StatusCode = (int) HttpStatusCode.Unauthorized;
 
-            var errorResponse = new IziWork.Business.DTO.ResultDTO
+            var errorResponse = new ResultDTO
             {
                 ErrorCodes = new List<int> { -1 },
                 Messages = new List<string> { errorMessages }

@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Helper\**" />
+    <EmbeddedResource Remove="Helper\**" />
+    <None Remove="Helper\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.4" />
@@ -19,8 +25,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Core.Repositories.Business">
+      <HintPath>..\Core.Repositories.Business\bin\Debug\net8.0\Core.Repositories.Business.dll</HintPath>
+    </Reference>
     <Reference Include="Dapper">
       <HintPath>C:\Users\Administrator\.nuget\packages\dapper\2.1.35\lib\net7.0\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="IziWork.Common">
+      <HintPath>..\IziWork.Common\bin\Debug\net8.0\IziWork.Common.dll</HintPath>
     </Reference>
     <Reference Include="IziWork.Data">
       <HintPath>..\IziWork.Data\bin\Debug\net8.0\IziWork.Data.dll</HintPath>
@@ -28,10 +40,6 @@
     <Reference Include="Mapster">
       <HintPath>C:\Users\Administrator\.nuget\packages\mapster\7.4.0\lib\net7.0\Mapster.dll</HintPath>
     </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Helper\" />
   </ItemGroup>
 
 </Project>

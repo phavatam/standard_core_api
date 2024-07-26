@@ -1,4 +1,5 @@
-﻿using IziWork.Business.Enums;
+﻿
+using IziWork.Common.Enums;
 using IziWork.Data.Entities;
 
 namespace IziWorkManagement.Middleware

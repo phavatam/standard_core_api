@@ -19,7 +19,7 @@ public partial class User
 
     public string? Email { get; set; }
 
-    public bool? IsActivated { get; set; }
+    public bool IsActivated { get; set; }
 
     public int? Type { get; set; }
 

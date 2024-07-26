@@ -1,8 +1,8 @@
 ﻿using IziWork.Business.Args;
-using IziWork.Business.Constans;
+
 using IziWork.Business.DTO;
 using IziWork.Business.Interfaces;
-using IziWork.Business.IRepositories;
+
 using IziWork.Data.Entities;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -10,6 +10,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Repositories.Business.IRepositories;
+using IziWork.Common.Constans;
+using IziWork.Common.Args;
+using IziWork.Common.DTO;
 
 namespace IziWork.Business.Handlers
 {

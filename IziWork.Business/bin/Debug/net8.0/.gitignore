@@ -3,3 +3,5 @@
 /IziWork.Business.pdb
 /IziWork.Business.dll
 /IziWork.Repository.pdb
+*.Repositories.Business.pdb
+*.Common.pdb

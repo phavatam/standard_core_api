@@ -1,5 +1,6 @@
 ﻿using IziWork.Business.DTO;
-using IziWork.Business.Enums;
+
+using IziWork.Common.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;

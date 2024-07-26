@@ -1,4 +1,5 @@
-﻿using IziWork.Business.Enums;
+﻿
+using IziWork.Common.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

@@ -26,7 +26,10 @@
           "System.IdentityModel.Tokens.Jwt": "7.5.1",
           "System.Linq.Dynamic.Core": "1.3.13",
           "Z.EntityFramework.Plus.EF6": "8.102.2.4",
+          "Core.Repositories.Business": "1.0.0.0",
+          "Core.Workflow.Business": "1.0.0.0",
           "IziWork.Business": "1.0.0.0",
+          "IziWork.Common": "1.0.0.0",
           "IziWork.Data": "1.0.0.0",
           "IziWork.Infrastructure": "1.0.0.0",
           "Newtonsoft.Json": "13.0.0.0"
@@ -1163,9 +1166,33 @@
           }
         }
       },
+      "Core.Repositories.Business/1.0.0.0": {
+        "runtime": {
+          "Core.Repositories.Business.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Core.Workflow.Business/1.0.0.0": {
+        "runtime": {
+          "Core.Workflow.Business.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "IziWork.Business/1.0.0.0": {
         "runtime": {
           "IziWork.Business.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "IziWork.Common/1.0.0.0": {
+        "runtime": {
+          "IziWork.Common.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -1959,7 +1986,22 @@
       "path": "z.expressions.eval/6.1.3",
       "hashPath": "z.expressions.eval.6.1.3.nupkg.sha512"
     },
+    "Core.Repositories.Business/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Core.Workflow.Business/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
     "IziWork.Business/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "IziWork.Common/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

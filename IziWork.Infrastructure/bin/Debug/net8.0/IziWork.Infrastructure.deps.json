@@ -773,11 +773,19 @@
           }
         }
       },
-      "Dapper/2.0.0.0": {
+      "Core.Repositories.Business/1.0.0.0": {
         "runtime": {
-          "Dapper.dll": {
-            "assemblyVersion": "2.0.0.0",
-            "fileVersion": "2.1.35.13827"
+          "Core.Repositories.Business.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "IziWork.Common/1.0.0.0": {
+        "runtime": {
+          "IziWork.Common.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
           }
         }
       },
@@ -786,6 +794,14 @@
           "Mapster.dll": {
             "assemblyVersion": "7.4.0.0",
             "fileVersion": "7.4.0.0"
+          }
+        }
+      },
+      "Dapper/2.0.0.0": {
+        "runtime": {
+          "Dapper.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.1.35.13827"
           }
         }
       }
@@ -1360,12 +1376,22 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Dapper/2.0.0.0": {
+    "Core.Repositories.Business/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "IziWork.Common/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
     },
     "Mapster/7.4.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Dapper/2.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

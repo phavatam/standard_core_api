@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using Core.Repositories.Business.IRepositories;
 using IziWork.Business.Args;
 using IziWork.Business.DTO;
 using IziWork.Business.Interfaces;
-using IziWork.Business.IRepositories;
 using IziWork.Business.ViewModel;
+using IziWork.Common.Args;
+using IziWork.Common.DTO;
 using IziWork.Data.Entities;
 using Mapster;
 using Microsoft.Extensions.Configuration;

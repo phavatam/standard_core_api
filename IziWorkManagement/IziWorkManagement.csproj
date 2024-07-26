@@ -7,10 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="log\**" />
     <Compile Remove="Services\**" />
+    <Compile Remove="UtilitiesDll\**" />
+    <Content Remove="log\**" />
     <Content Remove="Services\**" />
+    <Content Remove="UtilitiesDll\**" />
+    <EmbeddedResource Remove="log\**" />
     <EmbeddedResource Remove="Services\**" />
+    <EmbeddedResource Remove="UtilitiesDll\**" />
+    <None Remove="log\**" />
     <None Remove="Services\**" />
+    <None Remove="UtilitiesDll\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,8 +49,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Core.Repositories.Business">
+      <HintPath>..\Core.Repositories.Business\bin\Debug\net8.0\Core.Repositories.Business.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Workflow.Business">
+      <HintPath>..\Core.Workflow.Business\bin\Debug\net8.0\Core.Workflow.Business.dll</HintPath>
+    </Reference>
     <Reference Include="IziWork.Business">
       <HintPath>..\IziWork.Business\bin\Debug\net8.0\IziWork.Business.dll</HintPath>
+    </Reference>
+    <Reference Include="IziWork.Common">
+      <HintPath>..\IziWork.Common\bin\Debug\net8.0\IziWork.Common.dll</HintPath>
     </Reference>
     <Reference Include="IziWork.Data">
       <HintPath>..\IziWork.Data\bin\Debug\net8.0\IziWork.Data.dll</HintPath>

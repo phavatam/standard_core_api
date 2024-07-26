@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
 using IziWork.Business.Args;
-using IziWork.Business.Constans;
-using IziWork.Business.CustomExtensions;
+
 using IziWork.Business.DTO;
-using IziWork.Business.Enums;
+
 using IziWork.Business.Interfaces;
-using IziWork.Business.IRepositories;
+
 using IziWork.Data.Entities;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +21,13 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using Core.Repositories.Business.IRepositories;
+using Core.Repositories.Business.Enum;
+using Core.Repositories.Business.Interface;
+using IziWork.Common.Constans;
+using IziWork.Common.Enums;
+using IziWork.Common.DTO;
+using IziWork.Common.Args;
 
 namespace IziWork.Business.Handlers
 {

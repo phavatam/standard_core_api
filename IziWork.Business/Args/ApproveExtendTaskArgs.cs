@@ -1,5 +1,4 @@
-﻿using IziWork.Business.Enums;
-using IziWork.Data.Entities;
+﻿using IziWork.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

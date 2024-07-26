@@ -1,5 +1,5 @@
-﻿using IziWork.Business.Enums;
-using IziWork.Business.IRepositories;
+﻿using Core.Repositories.Business.IRepositories;
+using IziWork.Common.Enums;
 using IziWork.Data.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

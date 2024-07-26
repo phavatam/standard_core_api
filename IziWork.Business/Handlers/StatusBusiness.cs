@@ -1,7 +1,7 @@
 ﻿using IziWork.Business.Args;
 using IziWork.Business.DTO;
 using IziWork.Business.Interfaces;
-using IziWork.Business.IRepositories;
+
 using IziWork.Data.Entities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -10,6 +10,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Repositories.Business.IRepositories;
+using IziWork.Common.DTO;
+using IziWork.Common.Args;
 
 namespace IziWork.Business.Handlers
 {

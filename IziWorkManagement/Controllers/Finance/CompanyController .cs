@@ -7,6 +7,8 @@ using IziWorkManagement.Utility;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using IziWork.Common.Args;
+using IziWork.Common.DTO;
 
 namespace IziWorkManagement.Controllers.Finance
 {

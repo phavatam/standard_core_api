@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using IziWork.Business.Args;
-using IziWork.Business.CustomExtensions;
+using Core.Repositories.Business.IRepositories;
 using IziWork.Business.DTO;
-using IziWork.Business.Enums;
 using IziWork.Business.Interfaces;
-using IziWork.Business.IRepositories;
 using IziWork.Data.Abstracts;
 using IziWork.Data.Entities;
 using IziWork.Data.Interface;
@@ -28,8 +26,11 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using static IziWork.Business.Handlers.WorkflowBusiness;
-using IziWork.Business.Constans;
+using Core.Repositories.Business.Interface;
+using IziWork.Common.Constans;
+using IziWork.Common.Enums;
+using IziWork.Common.DTO;
+using IziWork.Common.Args;
 
 namespace IziWork.Business.Handlers
 {
@@ -296,7 +297,15 @@ namespace IziWork.Business.Handlers
                         _uow.GetRepository<TaskAttachmentMapping>().Add(newDocumentAttachmentMapping);
                     }
                 }
+            } else
+            {
+                var oldAttachmentFiles = _uow.GetRepository<TaskAttachmentMapping>().FindBy(x => x.TaskManagementId == findCurrentTask.Id && x.Type == 1);
+                if (oldAttachmentFiles != null)
+                {
+                    foreach (var item in oldAttachmentFiles) _uow.GetRepository<TaskAttachmentMapping>().Delete(item);
+                }
             }
+
             resultDTO.Object = mapData;
 
             if (resultDTO.ErrorCodes.Any())

@@ -2,7 +2,7 @@
 using IziWork.Business.Args;
 using IziWork.Business.DTO;
 using IziWork.Business.Interfaces;
-using IziWork.Business.IRepositories;
+
 using IziWork.Data.Entities;
 using Mapster;
 using MapsterMapper;
@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
+using Core.Repositories.Business.IRepositories;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
@@ -23,6 +24,9 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using IziWork.Common.DTO;
+using IziWork.Common.Args;
+using IziWork.Common.Constans;
 
 namespace IziWork.Business.Handlers
 {
@@ -249,7 +253,7 @@ namespace IziWork.Business.Handlers
             }
             if (args.IsActivated != null && args.IsActivated.HasValue)
             {
-                currentUser.IsActivated = args.IsActivated;
+                currentUser.IsActivated = args.IsActivated.Value;
             }
             if (args.Type != null && args.Type.HasValue)
             {
@@ -315,6 +319,13 @@ namespace IziWork.Business.Handlers
             {
                 return new ResultDTO() { Messages = new List<string> { "USERNAME_IS_NOT_EXISTS" }, ErrorCodes = new List<int> { -1 } };
             }
+
+            var inDepartmentHasHeadCount = await _uow.GetRepository<UserDepartmentMapping>().GetSingleAsync(x => x.UserId == currentUser.Id && x.IsHeadCount);
+            if (inDepartmentHasHeadCount == null)
+            {
+                return new ResultDTO() { Messages = new List<string> { MessageConst.HAS_NOT_BEEN_ASSIGNED_DEPARTMENT }, ErrorCodes = new List<int> { -1 } };
+            }
+
             #region Verify user 
             if (currentUser.IsBlocked.HasValue && currentUser.IsBlocked.Value)
             {

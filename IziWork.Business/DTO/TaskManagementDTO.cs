@@ -34,6 +34,6 @@ public partial class TaskManagementDTO
     public string? CreatedByFullName { get; set; }
     public string? ModifiedByFullName { get; set; }
     public virtual ICollection<TaskExtendDTO> TaskExtends { get; set; } = new List<TaskExtendDTO>();
-    /*public virtual ICollection<TaskAttachmentMapping> TaskAttachmentMappings { get; set; } = new List<TaskAttachmentMapping>();*/
+    public virtual ICollection<TaskAttachmentMappingDTO> TaskAttachmentMappings { get; set; } = new List<TaskAttachmentMappingDTO>();
     public virtual ICollection<TaskDepartmentMappingDTO> TaskDepartmentMappings { get; set; } = new List<TaskDepartmentMappingDTO>();
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Repositories.Business.DTO;
 using IziWork.Business.Args;
 using IziWork.Business.DTO;
 using IziWork.Business.ViewModel;
@@ -63,6 +64,17 @@ namespace IziWork.Business.MappingProfile
             CreateMap<RoleArgs, Role>();
             #endregion
             #region User In Department
+            CreateMap<UserDepartmentMapping, CurrentUserDepartmentMappingDTO>()
+                    .ForMember(x => x.UserLoginName, opt => opt.MapFrom(src => src.User.LoginName))
+                    .ForMember(x => x.FullName, opt => opt.MapFrom(src => src.User.FullName))
+                    .ReverseMap();
+            CreateMap<CurrentUserDepartmentMappingDTO, UserDepartmentMapping>().ReverseMap();
+            CreateMap<CurrentUserDepartmentRoleMappingDTO, UserDepartmentRoleMapping>();
+            CreateMap<UserDepartmentRoleMapping, CurrentUserDepartmentRoleMappingDTO>()
+                    .ForMember(x => x.RoleName, opt => opt.MapFrom(src => src.Role != null ? src.Role.Name : ""))
+                    .ForMember(x => x.IsActivated, opt => opt.MapFrom(src => src.Role != null ? src.Role.IsActivated : false))
+                    .ReverseMap();
+
             CreateMap<UserDepartmentMapping, UserDepartmentMappingDTO>()
                     .ForMember(x => x.UserLoginName, opt => opt.MapFrom(src => src.User.LoginName))
                     .ForMember(x => x.FullName, opt => opt.MapFrom(src => src.User.FullName))
@@ -73,6 +85,9 @@ namespace IziWork.Business.MappingProfile
                     .ForMember(x => x.RoleName, opt => opt.MapFrom(src => src.Role != null ? src.Role.Name : ""))
                     .ForMember(x => x.IsActivated, opt => opt.MapFrom(src => src.Role != null ? src.Role.IsActivated : false))
                     .ReverseMap();
+
+            
+
             #endregion
             #region MENU
             CreateMap<MenuArgs, Menu>();
@@ -126,28 +141,6 @@ namespace IziWork.Business.MappingProfile
                 .ForMember(x => x.MenuCode, opt => opt.MapFrom(src => src.Menu.Code))
                 .ReverseMap();
             CreateMap<MenuRoleMappingDTO, MenuRoleMapping>();
-            #endregion
-            #region Workflow Template
-            CreateMap<WorkflowTemplate, WorkflowTemplateDTO>()
-                    .ForMember(x => x.WorkflowSteps, opt => opt.MapFrom(src => src.WorkflowSteps))
-                    .ReverseMap();
-            CreateMap<WorkflowTemplateDTO, WorkflowTemplate>()
-                    .ForMember(x => x.WorkflowSteps, opt => opt.MapFrom(src => src.WorkflowSteps))
-                    .ReverseMap();
-            CreateMap<WorkflowStep, WorkflowStepDTO>();
-            CreateMap<WorkflowStepDTO, WorkflowStep>();
-
-            CreateMap<WorkflowRole, WorkflowRoleDTO>();
-            CreateMap<WorkflowRoleDTO, WorkflowRole>();
-
-            CreateMap<WorkflowInstance, WorkflowInstanceDTO>()
-                    .ReverseMap();
-            CreateMap<WorkflowInstanceDTO, WorkflowInstance>()
-                    .ReverseMap(); 
-
-            CreateMap<WorkflowProcessing, WorkflowProcessingDTO>();
-            CreateMap<WorkflowProcessingDTO, WorkflowProcessing>();
-
             #endregion
 
             #region Profile
@@ -207,6 +200,16 @@ namespace IziWork.Business.MappingProfile
 
             CreateMap<TaskManagementHistory, TaskManagementHistoryDTO>().ReverseMap();
             CreateMap<TaskManagementHistoryDTO, TaskManagementHistory>().ReverseMap();
+
+            CreateMap<TaskAttachmentMapping, TaskAttachmentMappingDTO>()
+                .ForMember(x => x.FileName, opt => opt.MapFrom(src => src.AttachmentFile != null ? src.AttachmentFile.FileName : null))
+                .ForMember(x => x.FileUniqueName, opt => opt.MapFrom(src => src.AttachmentFile != null ? src.AttachmentFile.FileUniqueName : null))
+                .ForMember(x => x.FileDisplayName, opt => opt.MapFrom(src => src.AttachmentFile != null ? src.AttachmentFile.FileDisplayName : null))
+                .ForMember(x => x.Extension, opt => opt.MapFrom(src => src.AttachmentFile != null ? src.AttachmentFile.Extension : null))
+                .ForMember(x => x.Type, opt => opt.MapFrom(src => src.AttachmentFile != null ? src.AttachmentFile.Type : null))
+                .ForMember(x => x.Size, opt => opt.MapFrom(src => src.AttachmentFile != null ? src.AttachmentFile.Size : null))
+                .ReverseMap(); ;
+            CreateMap<TaskAttachmentMappingDTO, TaskAttachmentMapping>();
 
             CreateMap<TaskDepartmentMapping, TaskDepartmentMappingDTO>()
                 /*.ForMember(x => x.DepartmentCode, opt => opt.MapFrom(src => src.Department != null ? src.Department.Code : ""))
