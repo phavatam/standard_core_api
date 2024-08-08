@@ -15,6 +15,6 @@
         public string? ModifiedBy { get; set; }
         public string? CreatedByFullName { get; set; }
         public string? ModifiedByFullName { get; set; }
-        public List<FinancialAccountDTO> Items { get; set; } = new List<FinancialAccountDTO>();
+        public List<FinancialAccountDTO> Children { get; set; } = new List<FinancialAccountDTO>();
     }
 }

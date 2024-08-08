@@ -10,8 +10,8 @@ namespace IziWork.Business.Args
 {
     public class GeneralJournalDetailArgs
     {
-        public Guid Id { get; set; }
-        public Guid GeneralJournalId { get; set; }
+        public Guid? Id { get; set; }
+        public Guid? GeneralJournalId { get; set; }
         public DateTimeOffset DateOfPeriod { get; set; }
         public string? DocumentNo { get; set; } = null!;
         public DateTimeOffset? DocumentDate { get; set; }

@@ -16,5 +16,6 @@ namespace IziWork.Business.Interfaces
         Task<ResultDTO> UpSertCompany(CompanyArgs args);
         Task<ResultDTO> DeleteCompanyById(Guid companyId);
         Task<ResultDTO> GetCompanyById(Guid companyId);
+        Task<ResultDTO> UploadData(Stream stream);
     }
 }

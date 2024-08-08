@@ -245,6 +245,39 @@ namespace IziWorkManagement.Middleware
                 };
                 dbContext.Roles.Add(newRole);
             }
+
+            findRole = dbContext.Roles.Find(new Guid("e1a8f722-4092-b2e8-b3e4-f78f6c1b1d9d"));
+            if (findRole == null)
+            {
+                var newRole = new Role
+                {
+                    Id = new Guid("e1a8f722-4092-b2e8-b3e4-f78f6c1b1d9d"),
+                    Code = "CEO", // Chief Executive Officer
+                    Name = "Giám đốc",
+                    IsActivated = true,
+                    IsDeleted = false,
+                    Created = DateTime.Now,
+                    Modified = DateTime.Now,
+                };
+                dbContext.Roles.Add(newRole);
+            }
+
+            findRole = dbContext.Roles.Find(new Guid("e1a8f721-4092-b2e8-b3e3-f78f6c1b1d0d"));
+            if (findRole == null)
+            {
+                var newRole = new Role
+                {
+                    Id = new Guid("e1a8f721-4092-b2e8-b3e3-f78f6c1b1d0d"),
+                    Code = "ChiefAccountant", // Chief Executive Officer
+                    Name = "Kế toán trưởng",
+                    IsActivated = true,
+                    IsDeleted = false,
+                    Created = DateTime.Now,
+                    Modified = DateTime.Now,
+                };
+                dbContext.Roles.Add(newRole);
+            }
+            
         }
 
         private static void AddWorkflow(UpgradeApplicationContext dbContext)

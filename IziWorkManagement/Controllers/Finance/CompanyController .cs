@@ -19,13 +19,19 @@ namespace IziWorkManagement.Controllers.Finance
         #region Variables
         private readonly AppSettingModel _appSettingModel;
         private readonly ICompanyBusiness _companyBusiness;
+        private readonly ILogger<AttachmentFileBusiness> _logger;
+        private string _uploadedFilesFolder = null;
         #endregion
         public CompanyController(
                     ICompanyBusiness companyBusiness,
-                    IOptionsMonitor<AppSettingModel> optionsMonitor)
+                    IWebHostEnvironment env,
+                    IOptionsMonitor<AppSettingModel> optionsMonitor,
+                    ILogger<AttachmentFileBusiness> logger)
         {
             _appSettingModel = optionsMonitor.CurrentValue;
             _companyBusiness = companyBusiness;
+            _uploadedFilesFolder = Path.Combine(env.ContentRootPath, "Attachments");
+            _logger = logger;
         }
         #region INSERT - UPDATE - DELETE
 
@@ -57,5 +63,27 @@ namespace IziWorkManagement.Controllers.Finance
             return Ok(result);
         }
         #endregion
+
+        [HttpPost]
+        public async Task<IActionResult> Import()
+        {
+            try
+            {
+                Directory.CreateDirectory(_uploadedFilesFolder); // Make sure the folder exists
+                MemoryStream content = new MemoryStream();
+                //var test = new StreamContent(HttpContext.Current.Request.GetBufferlessInputStream(true));
+                var test = new StreamContent(Request.Body);
+                await test.CopyToAsync(content);
+                var files = Request.Form.Files;
+                await Request.Body.CopyToAsync(content);
+                var result = await _companyBusiness.UploadData(content);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error at: Import ", ex.Message);
+                return Ok(new ResultDTO { ErrorCodes = { 1001 }, Messages = { "Something went wrong!" } });
+            }
+        }
     }
 }

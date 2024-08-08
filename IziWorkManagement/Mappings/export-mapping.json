@@ -1,0 +1,10 @@
+{
+  "CompanyInfo": [
+    {
+      "Name": "Name",
+      "DisplayName": "Company Name",
+      "Visible": true,
+      "Type": "0"
+    }
+  ]
+}

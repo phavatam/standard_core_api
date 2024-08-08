@@ -18,6 +18,14 @@ namespace IziWork.Business.DTO
         public Guid? DebitAccountId { get; set; }
         public Guid? CreditAccountId { get; set; }
         public decimal Amount { get; set; }
+        public DateTimeOffset? Created { get; set; }
+        public DateTimeOffset? Modified { get; set; }
+        public Guid? CreatedById { get; set; }
+        public Guid? ModifiedById { get; set; }
+        public string? CreatedBy { get; set; }
+        public string? ModifiedBy { get; set; }
+        public string? CreatedByFullName { get; set; }
+        public string? ModifiedByFullName { get; set; }
         public FinancialAccountDTO DebitAccount { get; set; }
         public FinancialAccountDTO CreditAccount { get; set; }
     }

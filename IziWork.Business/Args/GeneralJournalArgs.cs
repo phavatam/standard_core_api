@@ -10,7 +10,7 @@ namespace IziWork.Business.Args
 {
     public class GeneralJournalArgs
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
         public Guid CompanyId { get; set; }
         public string Year { get; set; } = null!;
         public virtual List<GeneralJournalDetailArgs> GeneralJournalDetails { get; set; } = new List<GeneralJournalDetailArgs>();

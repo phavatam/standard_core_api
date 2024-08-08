@@ -79,7 +79,7 @@ namespace IziWork.Business.Handlers
             var parentAccount = await _uow.GetRepository<FinancialAccount>().FindByAsync<FinancialAccountDTO>(x => x.ParentFinanceAccountId != null && x.ParentFinanceAccountId == Id);
             if (parentAccount != null)
             {
-                child.Items = parentAccount.ToList();
+                child.Children = parentAccount.ToList();
                 foreach (var acc in parentAccount)
                 {
                     await GetChild(acc.Id, acc);

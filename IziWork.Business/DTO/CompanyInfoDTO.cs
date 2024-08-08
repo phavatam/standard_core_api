@@ -30,7 +30,7 @@
 
         public string? AccountantName { get; set; }
 
-        public Guid? Ceoid { get; set; }
+        public Guid? CeoId { get; set; }
 
         public string? Ceoname { get; set; }
 

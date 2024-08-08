@@ -33,9 +33,9 @@ public partial class CompanyInfo
 
     public string? AccountantName { get; set; }
 
-    public Guid? Ceoid { get; set; }
+    public Guid? CeoId { get; set; }
 
-    public string? Ceoname { get; set; }
+    public string? CeoName { get; set; }
 
     public string? PositionName { get; set; }
 

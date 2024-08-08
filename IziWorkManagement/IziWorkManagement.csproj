@@ -75,6 +75,8 @@
   <ItemGroup>
     <Folder Include="Attachments\" />
     <Folder Include="Attachments\" />
+    <Folder Include="Mappings\" />
+    <Folder Include="PrintDocument\" />
   </ItemGroup>
 
 </Project>

@@ -82,6 +82,7 @@ namespace IziWork.Business.MappingProfile
             CreateMap<UserDepartmentMappingDTO, UserDepartmentMapping>();
             CreateMap<UserDepartmentRoleMappingDTO, UserDepartmentRoleMapping>();
             CreateMap<UserDepartmentRoleMapping, UserDepartmentRoleMappingDTO>()
+                    .ForMember(x => x.RoleCode, opt => opt.MapFrom(src => src.Role != null ? src.Role.Code : ""))
                     .ForMember(x => x.RoleName, opt => opt.MapFrom(src => src.Role != null ? src.Role.Name : ""))
                     .ForMember(x => x.IsActivated, opt => opt.MapFrom(src => src.Role != null ? src.Role.IsActivated : false))
                     .ReverseMap();
@@ -253,8 +254,8 @@ namespace IziWork.Business.MappingProfile
             #endregion
 
             #region Company
-            CreateMap<CompanyInfo, CompanyInfoDTO>().ReverseMap();
-            CreateMap<CompanyInfo, CompanyInfoDTO>().ReverseMap();
+            CreateMap<CompanyInfo, CompanyInfoImportFileDTO>().ReverseMap();
+            CreateMap<CompanyInfo, CompanyInfoImportFileDTO>().ReverseMap();
 
             CreateMap<CompanyInfo, CompanyArgs>().ReverseMap();
             CreateMap<CompanyArgs, CompanyInfo>().ReverseMap();

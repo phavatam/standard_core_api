@@ -12,6 +12,7 @@ namespace IziWork.Business.Interfaces
 {
     public interface IFinancialAccountBusiness
     {
+        Task<ResultDTO> GetTreeList(QueryArgs args);
         Task<ResultDTO> GetList(QueryArgs args);
         Task<ResultDTO> UpSert(FinancialAccountArgs args);
         Task<ResultDTO> DeleteById(Guid id);

@@ -54,9 +54,9 @@ namespace IziWork.Business.Handlers
                 goto Finish;
             }
 
-            if (args.Id != Guid.Empty)
+            if (args.Id != null && args.Id.Value != Guid.Empty)
             {
-                var findGeneralJournal = await _uow.GetRepository<GeneralJournal>().FindByIdAsync(args.Id);
+                var findGeneralJournal = await _uow.GetRepository<GeneralJournal>().FindByIdAsync(args.Id.Value);
                 if (findGeneralJournal == null)
                 {
                     dataReturn.Messages = new List<string>() { MessageConst.NOT_FOUND_ITEM };
@@ -243,8 +243,8 @@ namespace IziWork.Business.Handlers
                 goto Finish;
             }
 
-            if (args.Id != Guid.Empty) {
-                var findGeneralJournalDetail = await _uow.GetRepository<GeneralJournalDetail>().FindByIdAsync(args.Id);
+            if (args.Id != null && args.Id.Value != Guid.Empty) {
+                var findGeneralJournalDetail = await _uow.GetRepository<GeneralJournalDetail>().FindByIdAsync(args.Id.Value);
                 if (findGeneralJournalDetail == null)
                 {
                     dataReturn.Messages = new List<string>() { MessageConst.NOT_FOUND_ITEM };

@@ -3,12 +3,16 @@ using IziWork.Business.Args;
 using IziWork.Business.DTO;
 using IziWork.Business.Handlers;
 using IziWork.Business.Interfaces;
+using IziWork.Business.Interfaces.File;
+using IziWork.Common.Args;
 using IziWork.Common.DTO;
+using IziWork.Common.Enums;
 using IziWorkManagement.Utility;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting.Internal;
 using Microsoft.Extensions.Options;
+using System.ComponentModel;
 using System.Net.Http.Headers;
 
 namespace IziWorkManagement.Controllers
@@ -22,6 +26,7 @@ namespace IziWorkManagement.Controllers
         private readonly ICategoryDetailBusiness _categoryDetailBusiness;
         private readonly ILogger<AttachmentFileController> _logger;
         private readonly IAttachmentFileBusiness _attachmentFileBusiness;
+        private readonly IExcuteFileProcessing _excuteFileProcessing;
         private readonly IMapper _mapper;
         private string _uploadedFilesFolder = null;
         #endregion
@@ -31,6 +36,7 @@ namespace IziWorkManagement.Controllers
                     ILogger<AttachmentFileController> logger,
                     IWebHostEnvironment env,
                     IAttachmentFileBusiness attachmentFileBusiness,
+                    IExcuteFileProcessing excuteFileProcessing,
                     IMapper mapper
                     )
         {
@@ -39,6 +45,7 @@ namespace IziWorkManagement.Controllers
             _logger = logger;
             _uploadedFilesFolder = Path.Combine(env.ContentRootPath, "Attachments");
             _attachmentFileBusiness = attachmentFileBusiness;
+            _excuteFileProcessing = excuteFileProcessing;
             _mapper = mapper;
         }
 
@@ -242,121 +249,53 @@ namespace IziWorkManagement.Controllers
             }
         }
 
-        /*public byte[] GetDataFromUrl(string fullUrl)
+        [HttpPost]
+        public async Task<IActionResult> Export(FileProcessingType type, [FromBody] QueryArgs args)
         {
-            byte[] m_Result = null;
-
-            var _SharePointURL = ConfigurationManager.AppSettings["siteUrl"];
-
-            var _Username = ConfigurationManager.AppSettings["SharePoint_Username"];
-            var _Domain = ConfigurationManager.AppSettings["SharePoint_Domain"];
-            var _Password = ConfigurationManager.AppSettings["SharePoint_Password"];
-
-            using (ClientContext Context = new ClientContext(_SharePointURL))
-            {
-
-                Context.AuthenticationMode = ClientAuthenticationMode.FormsAuthentication;
-                Context.FormsAuthenticationLoginInfo = new FormsAuthenticationLoginInfo(_Username, _Password);
-                Microsoft.SharePoint.Client.File filetoDownload = Context.Web.GetFileByServerRelativeUrl(fullUrl);
-                Context.Load(filetoDownload);
-                Context.ExecuteQuery();
-
-                var stream = filetoDownload.OpenBinaryStream();
-                Context.ExecuteQuery();
-                using (var memoryStream = new MemoryStream())
-                {
-                    stream.Value.CopyTo(memoryStream);
-                    m_Result = memoryStream.ToArray();
-                }
-            }
-
-            return m_Result;
-        }*/
-
-        /*public bool CreateFileInDocumentList(string uploadFilePath, string fileUniqueName, AttachmentFileViewModel attachmentFile)
-        {
-            bool result = false;
             try
             {
-                var _SharePointURL = ConfigurationManager.AppSettings["siteUrl"];
-                var _Username = ConfigurationManager.AppSettings["SharePoint_Username"];
-                var _Domain = ConfigurationManager.AppSettings["SharePoint_Domain"];
-                var _Password = ConfigurationManager.AppSettings["SharePoint_Password"];
-                using (ClientContext Context = new ClientContext(_SharePointURL))
+                var arrayContent = await _excuteFileProcessing.ExportAsync(type, args);
+                if (arrayContent.Object == null)
                 {
-                    Context.AuthenticationMode = ClientAuthenticationMode.FormsAuthentication;
-                    Context.FormsAuthenticationLoginInfo = new FormsAuthenticationLoginInfo(_Username, _Password);
-
-                    var _linkFolder = "/Shared Documents/" + attachmentFile.Id;
-
-                    if (FileExists(Context, _linkFolder)) // trường hợp có rồi thì chỉ việc đưa file lên 
-                    {
-                        FileCreationInformation fileCreationInformation = new FileCreationInformation
-                        {
-                            Content = System.IO.File.ReadAllBytes(uploadFilePath),
-                            Url = System.IO.Path.Combine(_linkFolder, System.IO.Path.GetFileName(uploadFilePath)),
-                            Overwrite = true
-                        };
-
-                        var list = Context.Web.Lists.GetByTitle("Documents");
-                        var uploadFile = list.RootFolder.Files.Add(fileCreationInformation);
-                        Context.Load(uploadFile);
-                        Context.ExecuteQuery();
-
-                        result = true;
-                    }
-                    else // chưa có thì tạo ra folder trước rồi đưa file lên
-                    {
-                        var list = Context.Web.Lists.GetByTitle("Documents");
-                        var folder = list.RootFolder;
-                        Context.Load(folder);
-                        Context.ExecuteQuery();
-                        ListItemCreationInformation newItemInfo = new ListItemCreationInformation();
-                        newItemInfo.UnderlyingObjectType = FileSystemObjectType.Folder;
-                        newItemInfo.LeafName = attachmentFile.Id.ToString();
-                        ListItem newListItem = list.AddItem(newItemInfo);
-                        newListItem["Title"] = attachmentFile.Id.ToString();
-                        newListItem.Update();
-                        Context.ExecuteQuery();
-
-                        FileCreationInformation fileCreationInformation = new FileCreationInformation
-                        {
-                            Content = System.IO.File.ReadAllBytes(uploadFilePath),
-                            Url = System.IO.Path.Combine(_linkFolder, System.IO.Path.GetFileName(uploadFilePath)),
-                            Overwrite = true
-                        };
-                        var uploadFile = list.RootFolder.Files.Add(fileCreationInformation);
-                        Context.Load(uploadFile);
-                        Context.ExecuteQuery();
-                        result = true;
-
-                    }
+                    return Ok(new ResultDTO { ErrorCodes = { 1003 }, Messages = { "No Data" } });
                 }
+                var fileContent = new FileResultDTO
+                {
+                    Content = arrayContent.Object,
+                    FileName = string.Format("{0} Requests_{1}.xlsx", GetEnumDescription(type), DateTime.Now.ToLocalTime().ToString("dd_MM_yyyy HH:mm:ss")),
+                    Type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                };
+                return Ok(new ResultDTO { Object = fileContent });
             }
             catch (Exception ex)
             {
-                result = false;
+                _logger.LogError($"Error at Export File: {type.ToString()}", ex.Message);
+                return Ok(new ResultDTO { ErrorCodes = { 1003 }, Messages = { "No Data" } });
             }
-            return result;
-        }*/
+        }
 
-        /*private bool FileExists(ClientContext context, string url)
+        public static string GetEnumDescription(Enum value)
         {
-            var file = context.Web.GetFileByServerRelativeUrl(url);
-            context.Load(file, f => f.Exists);
+            var fieldInfo = value.GetType().GetField(value.ToString());
+            var attributes = (DescriptionAttribute[]) fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
+            return attributes.Length > 0 ? attributes[0].Description : value.ToString();
+        }
+
+        /*[HttpPost]
+        public async Task<IHttpActionResult> Import(FileProcessingType type)
+        {
             try
             {
-                context.ExecuteQuery();
-                if (file.Exists)
-                {
-                    return true;
-                }
-                return false;
+                var content = HttpContext.Current.Request.GetBufferlessInputStream(true);
+                var result = await _excuteFileProcessing.ImportAsync(type, content as FileStream);
+                return Ok(result);
             }
             catch (Exception ex)
             {
-                return false;
+                _logger.LogError($"Error at: Import {type.GetEnumDescription()}", ex.Message);
+                return Ok(new ResultDTO { ErrorCodes = { 1001 }, Messages = { "Something went wrong!" } });
             }
         }*/
+
     }
 }

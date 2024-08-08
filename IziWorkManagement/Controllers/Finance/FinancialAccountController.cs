@@ -26,6 +26,13 @@ namespace IziWorkManagement.Controllers.Finance
         }
         #region INSERT - UPDATE - DELETE
 
+        [HttpPost("GetTreeList")]
+        public async Task<IActionResult> GetTreeList(QueryArgs args)
+        {
+            var result = await _financialBusiness.GetTreeList(args);
+            return Ok(result);
+        }
+
         [HttpPost("GetList")]
         public async Task<IActionResult> GetList(QueryArgs args)
         {

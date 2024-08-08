@@ -2,8 +2,9 @@
 using CacheManager.Core;
 using EFSecondLevelCache.Core;
 using IziWork.Business.Handlers;
+using IziWork.Business.Handlers.File;
 using IziWork.Business.Interfaces;
-
+using IziWork.Business.Interfaces.File;
 using IziWork.Business.MappingProfile;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
@@ -49,6 +50,7 @@ namespace IziWork.Infrastructure.ServiceRegister
             services.AddScoped<ICompanyBusiness, CompanyBusiness>();
             services.AddScoped<IFinancialAccountBusiness, FinancialAccountBusiness>();
             services.AddScoped<IAccountingBalanceSheetBusiness, AccountingBalanceSheetBusiness>();
+            services.AddScoped<IExcuteFileProcessing, ExcuteFileProcessing>();
         }
     }
 }

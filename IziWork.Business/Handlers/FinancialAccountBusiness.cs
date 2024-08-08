@@ -37,18 +37,8 @@ namespace IziWork.Business.Handlers
             _uow = uow;
             _mapper = mapper;
         }
-        public async Task<ResultDTO> GetList(QueryArgs args)
+        public async Task<ResultDTO> GetTreeList(QueryArgs args)
         {
-            /*var userList = await _uow.GetRepository<FinancialAccount>().FindByAsync<FinancialAccountDTO>(args.Order, args.Page, args.Limit, args.Predicate, args.PredicateParameters);
-            var totalList = await _uow.GetRepository<FinancialAccount>().CountAsync(args.Predicate, args.PredicateParameters);
-            return new ResultDTO()
-            {
-                Object = new ArrayResultDTO()
-                {
-                    Data = userList,
-                    Count = totalList
-                }
-            };*/
             var listAllData = await _uow.GetRepository<FinancialAccount>().FindByAsync<FinancialAccountDTO>(x => true);
             var listData = await _uow.GetRepository<FinancialAccount>().FindByAsync<FinancialAccountDTO>(args.Predicate, args.PredicateParameters);
             List<FinancialAccountDTO> tree = new List<FinancialAccountDTO>();
@@ -86,12 +76,26 @@ namespace IziWork.Business.Handlers
             }
         }
 
+        public async Task<ResultDTO> GetList(QueryArgs args)
+        {
+            var list = await _uow.GetRepository<FinancialAccount>().FindByAsync<FinancialAccountDTO>(args.Order, args.Page, args.Limit, args.Predicate, args.PredicateParameters);
+            var totalList = await _uow.GetRepository<FinancialAccount>().CountAsync(args.Predicate, args.PredicateParameters);
+            return new ResultDTO()
+            {
+                Object = new ArrayResultDTO()
+                {
+                    Data = list,
+                    Count = totalList
+                }
+            };
+        }
+
         protected async Task GetChild(Guid Id, FinancialAccountDTO child)
         {
             var parentAccount = await _uow.GetRepository<FinancialAccount>().FindByAsync<FinancialAccountDTO>(x => x.ParentFinanceAccountId != null && x.ParentFinanceAccountId == Id);
             if (parentAccount != null)
             {
-                child.Items = parentAccount.ToList();
+                child.Children = parentAccount.ToList();
                 foreach (var acc in parentAccount)
                 {
                     await GetChild(acc.Id, acc);

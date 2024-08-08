@@ -341,10 +341,7 @@ public partial class UpgradeApplicationContext : DbContext
             entity.Property(e => e.AccountingMethod).HasMaxLength(100);
             entity.Property(e => e.Address).HasMaxLength(255);
             entity.Property(e => e.BusinessSector).HasMaxLength(50);
-            entity.Property(e => e.Ceoid).HasColumnName("CEOId");
-            entity.Property(e => e.Ceoname)
-                .HasMaxLength(100)
-                .HasColumnName("CEOName");
+            entity.Property(e => e.CeoName).HasMaxLength(100);
             entity.Property(e => e.CompanyName).IsUnicode(false);
             entity.Property(e => e.CreatedBy).HasMaxLength(255);
             entity.Property(e => e.CreatedByFullName).HasMaxLength(255);

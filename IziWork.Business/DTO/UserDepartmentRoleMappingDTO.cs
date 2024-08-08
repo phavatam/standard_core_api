@@ -11,6 +11,7 @@ namespace IziWork.Business.DTO
         public Guid Id { get; set; }
         public Guid? UserDepartmentMappingId { get; set; }
         public Guid? RoleId { get; set; }
+        public string RoleCode { get; set; }
         public string RoleName { get; set; }
         public bool IsActivated { get; set; }
         public DateTimeOffset? Created { get; set; }
